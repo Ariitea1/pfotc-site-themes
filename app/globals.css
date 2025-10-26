@@ -3,111 +3,114 @@
 @tailwind utilities;
 
 /* =========================================================
-   🎨 Couleur de fond PFOTC
+   🌌 PFOTC – Thème Aurora Anthracite
    ========================================================= */
 :root {
-  --bg: #0b1220;
-}
-
-html, body {
-  background-color: var(--bg);
-  color: rgb(226 232 240); /* slate-200 */
-  overflow-x: hidden;
+  --bg-top: #1a1f29;         /* Gris anthracite clair */
+  --bg-bottom: #0e1219;      /* Gris anthracite foncé */
+  --text: #e6edf5;           /* Texte clair */
+  --accent: #00c9ff;         /* Bleu PFOTC */
+  --halo-inner: rgba(0, 217, 255, 0.35);
+  --halo-outer: rgba(100, 170, 255, 0.15);
 }
 
 /* =========================================================
-   🌌 PFOTC HALO – effet lumineux "horizon terrestre"
+   🩶 Fond principal Aurora
+   ========================================================= */
+html, body {
+  background: linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
+  color: var(--text);
+  overflow-x: hidden;
+  transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+/* =========================================================
+   💠 Halo Aurora – effet horizon PFOTC
    ========================================================= */
 .halo {
   position: absolute;
-  bottom: -200px;
+  bottom: -250px;
   left: 50%;
-  width: 160%;
-  height: 700px;
+  width: 180%;
+  height: 800px;
   transform: translateX(-50%);
   background: radial-gradient(
     ellipse at center,
-    rgba(255, 255, 255, 0.4) 0%,
-    rgba(180, 230, 255, 0.25) 20%,
-    rgba(0, 180, 255, 0.15) 45%,
-    rgba(0, 120, 255, 0.1) 70%,
-    transparent 85%
+    var(--halo-inner) 0%,
+    var(--halo-outer) 50%,
+    transparent 80%
   );
-  filter: blur(100px);
+  filter: blur(120px);
   opacity: 0.9;
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
-  animation: haloPulse 18s ease-in-out infinite,
-             haloDrift 90s linear infinite;
+  animation: haloPulse 18s ease-in-out infinite alternate;
 }
 
-/* 🌠 Animation pulsation lumineuse du halo */
+/* 🌠 Animation douce de l'aura */
 @keyframes haloPulse {
   0% {
     opacity: 0.75;
-    scale: 1;
+    transform: translateX(-50%) scale(1);
   }
   50% {
     opacity: 1;
-    scale: 1.05;
+    transform: translateX(-50%) scale(1.06);
   }
   100% {
     opacity: 0.75;
-    scale: 1;
-  }
-}
-
-/* 🌎 Mouvement lent pour effet orbital */
-@keyframes haloDrift {
-  0% {
-    transform: translateX(-50%) rotate(0deg);
-  }
-  50% {
-    transform: translateX(-52%) rotate(0.5deg);
-  }
-  100% {
-    transform: translateX(-50%) rotate(0deg);
+    transform: translateX(-50%) scale(1);
   }
 }
 
 /* =========================================================
-   💫 Animation lente générique (utilisée sur le logo)
+   ✨ Liens et hover
    ========================================================= */
-@keyframes pulse-slow {
-  0%, 100% {
-    opacity: 0.8;
-    scale: 1;
-  }
-  50% {
-    opacity: 1;
-    scale: 1.05;
-  }
+a {
+  color: var(--accent);
+  transition: color 0.3s ease, opacity 0.3s ease;
 }
 
-.animate-pulse-slow {
-  animation: pulse-slow 12s ease-in-out infinite;
+a:hover {
+  opacity: 0.85;
 }
 
 /* =========================================================
-   🌊 Effet sonar PFOTC – onde lumineuse subtile
+   💎 Boutons (si tu veux homogénéiser ton design)
    ========================================================= */
-@keyframes sonar {
-  0% {
-    transform: scale(0.5);
-    opacity: 0.6;
-    border-width: 2px;
-  }
-  70% {
-    opacity: 0.2;
-  }
-  100% {
-    transform: scale(2.5);
-    opacity: 0;
-    border-width: 1px;
-  }
+.btn-primary {
+  background: var(--accent);
+  color: #0b1220;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.animate-sonar {
-  animation: sonar 2.8s ease-out 0.5s;
+.btn-primary:hover {
+  background: #33dbff;
+  transform: scale(1.03);
 }
+
+.btn-outline {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent);
+}
+
+/* =========================================================
+   🎯 Police et finition
+   ========================================================= */
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
